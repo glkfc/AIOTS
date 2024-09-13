@@ -10,7 +10,7 @@ Fully automated qemu simulation script Auto IoT Simulate Tool.
 
 ✨ **Broad Support**: Emulates both ARM and MIPS architectures, covering mainstream IoT devices.
 
-👋 **Easy Setup**: AIOTS designed for beginners, with no need to worry about complex environment setups.
+👋 **Easy Setup**: AIOTS designed for beginners, with no need to worry about complex environment.
 
 🎉 **Research-Friendly**: A helpful tool for newcomers to learn and explore IoT vulnerability research.
 

@@ -1,6 +1,6 @@
 
 
-<img src="pic/image-20240913225517878.png" alt="image-20240913225517878" style="zoom: 33%;" />
+<img src="pic/image-20240913225517878.png" alt="image-20240913225517878" style="width:50%;" />
 
 ---
 

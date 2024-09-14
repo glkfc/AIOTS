@@ -1,7 +1,6 @@
 <div align="center">
 <img src="pic/image-20240913225517878.png" alt="image-20240913225517878" style="width:50%;" />
 </div>
----
 
 ## Preface
 

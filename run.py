@@ -106,9 +106,8 @@ filesystem = args.filesystem
 
 qemu_commond = {
     "MIPS": {
-        "LSB": f"qemu-system-arm -M versatilepb -kernel ./{data}/vmlinux -initrd ./{data}/initrd.img -hda ./{data}/debian.qcow2 -append \"root=/dev/sda1 console=tty0\" -net nic -net tap,ifname=tap0 -s -nographic",
-        "MSB": f"qemu-system-arm -M versatilepb -kernel ./{data}/vmlinux -initrd ./{data}/initrd.img -hda ./{data}/debian.qcow2 -append \"root=/dev/sda1 console=tty0\" -net nic -net tap,ifname=tap0 -s -nographic"
-
+        "MSB": f"qemu-system-mips -M malta -kernel ./{data}/vmlinux -hda ./{data}/debian.qcow2 -append \"root=/dev/sda1 console=tty0\" -net nic -net tap,ifname=tap0 -s -nographic",
+        "LSB": f"qemu-system-mipsel -M malta -kernel ./{data}/vmlinux -hda ./{data}/debian.qcow2 -append \"root=/dev/sda1 console=tty0\" -net nic -net tap,ifname=tap0 -s -nographic"
     },
     "ARM": {
         "LSB": f"qemu-system-arm -M versatilepb -kernel ./{data}/vmlinux -initrd ./{data}/initrd.img -hda ./{data}/debian.qcow2 -append \"root=/dev/sda1 console=tty0\" -net nic -net tap,ifname=tap0 -s -nographic",

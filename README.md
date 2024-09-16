@@ -73,6 +73,12 @@ git clone https://github.com/glkfc/AIOTS.git
 cd AIOTS
 ```
 
+- Add executable permissions
+
+```sh
+chmod +x ./script/*
+```
+
 - Use the following command to simulate
 
 ```bash

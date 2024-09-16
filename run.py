@@ -117,7 +117,7 @@ qemu_commond = {
 }
 
 
-
+os.system("sudo chmod +x ./script/*")
 print_art()
 print(f"[+]File path: {args.filesystem}")
 

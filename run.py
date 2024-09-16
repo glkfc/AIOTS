@@ -145,28 +145,27 @@ flag = download_data(args.data, architecture, endianness)
 create_tap_interface("tap0", "10.10.10.1/24")
 configure_ip_forwarding()
 
+if args.script and flag == 0:
+    flag = 2  # 表示第一次且有脚本
+elif args.script and flag == 1:
+    flag = 3  # 表示不是第一次且有脚本
 
-if flag == 0:
-    """If the folder does not exist, you need to configure all procedures, including the file system"""
-    os.system(f"tar -cf ./{args.data}/rootfs.tar {filesystem}")
+"""If the folder does not exist, you need to configure all procedures, including the file system"""
+os.system(f"tar -cf ./{args.data}/rootfs.tar {filesystem}")
 
-    PORT = 8081
-    Handler = http.server.SimpleHTTPRequestHandler
+PORT = 8081
+Handler = http.server.SimpleHTTPRequestHandler
 
-    httpd = socketserver.TCPServer(("", PORT), Handler)
-    server_thread = threading.Thread(target=httpd.serve_forever)
-    server_thread.daemon = True
-    server_thread.start()
+httpd = socketserver.TCPServer(("", PORT), Handler)
+server_thread = threading.Thread(target=httpd.serve_forever)
+server_thread.daemon = True
+server_thread.start()
 
-    print(f"[+]Serving HTTP on port {PORT} in the background...")
-    print(f"[+]Start qemu")
-    commond = qemu_commond[architecture][endianness]
-    os.system(f"./script/init.sh {commond} {args.data}")
+print(f"[+]Serving HTTP on port {PORT} in the background...")
+print(f"[+]Start qemu")
+commond = qemu_commond[architecture][endianness]
+print(flag, args.data, args.script)
+os.system(f"./script/init.sh {commond} {flag} {args.data} {args.script}") # 改
 
-    httpd.shutdown()
-    httpd.server_close()
-else:
-    """If the folder exists, just configure the ip address"""
-    print(f"[+]Start qemu")
-    commond = qemu_commond[architecture][endianness]
-    os.system(f"./script/simple.sh {commond}")
+httpd.shutdown()
+httpd.server_close()

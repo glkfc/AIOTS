@@ -29,7 +29,7 @@ When I first came into contact with IOT vulnerability mining, the first step was
 ## Todo List
 
 - [ ] Add testing for `mips` architecture
-- [ ] Add script function
+- [x] ~~Add script function~~
 - [ ] Add`gdb` debugging testing
 
 ## Install dependencies

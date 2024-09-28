@@ -151,7 +151,10 @@ elif args.script and flag == 1:
     flag = 3  # 表示不是第一次且有脚本
 
 """If the folder does not exist, you need to configure all procedures, including the file system"""
-os.system(f"tar -cf ./{args.data}/rootfs.tar {filesystem}")
+os.system(f"cp -r {filesystem} ./rootfs")
+os.system(f"tar -cf ./{args.data}/rootfs.tar rootfs")
+os.system(f"sudo rm -rf rootfs")
+
 
 PORT = 8081
 Handler = http.server.SimpleHTTPRequestHandler

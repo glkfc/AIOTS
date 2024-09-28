@@ -27,7 +27,7 @@ sleep 2
 expect "~# "
 switch  $flag {
     "0" {
-    	send "wget 10.10.10.1:8081/$data_name/rootfs.tar; wget 10.10.10.1:8081/script/a.sh; chmod 777 a.sh; ./a.sh\r"
+    	send "wget 10.10.10.1:8081/$data_name/rootfs.tar; tar -xvf rootfs.tar ;wget 10.10.10.1:8081/script/a.sh; chmod 777 a.sh; ./a.sh\r"
     }
     "1" {
     	send "mount -o bind /dev ./rootfs/dev;mount -t proc /proc ./rootfs/proc;chroot ./rootfs sh\r"

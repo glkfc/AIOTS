@@ -13,9 +13,9 @@ url_dict = {
              'https://people.debian.org/~aurel32/qemu/mips/debian_wheezy_mips_standard.qcow2'],
     "mipsel": ['https://people.debian.org/~aurel32/qemu/mipsel/vmlinux-3.2.0-4-4kc-malta',
                'https://people.debian.org/~aurel32/qemu/mipsel/debian_wheezy_mipsel_standard.qcow2'],
-    "armel": ['https://people.debian.org/~aurel32/qemu/armel/vmlinuz-3.2.0-4-versatile',
-              'https://people.debian.org/~aurel32/qemu/armel/initrd.img-3.2.0-4-versatile',
-              'https://people.debian.org/~aurel32/qemu/armel/debian_wheezy_armel_standard.qcow2']
+    "arm": ['https://people.debian.org/~aurel32/qemu/armhf/vmlinuz-3.2.0-4-vexpress',
+              'https://people.debian.org/~aurel32/qemu/armhf/initrd.img-3.2.0-4-vexpress',
+              'https://people.debian.org/~aurel32/qemu/armhf/debian_wheezy_armhf_standard.qcow2']
 }
 
 def find_file(filename, search_path):
@@ -80,12 +80,13 @@ def download_data(data_path, architecture, endianness):
                 wget.download(url_dict["mipsel"][1], f"./{data_path}/debian.qcow2")
                 print("[+]deian.qcow2 done!")
         else:
-            wget.download(url_dict["armel"][0], f"./{data_path}/vmlinux")
+            wget.download(url_dict["arm"][0], f"./{data_path}/vmlinux")
             print(" [+]vmlinux done!")
-            wget.download(url_dict["armel"][1], f"./{data_path}/initrd.img")
+            wget.download(url_dict["arm"][1], f"./{data_path}/initrd.img")
             print(" [+]initrd.img done!")
-            wget.download(url_dict["armel"][2], f"./{data_path}/debian.qcow2")
+            wget.download(url_dict["arm"][2], f"./{data_path}/debian.qcow2")
             print(" [+]deian.qcow2 done!")
+            os.system(f"qemu-img resize ./{data}/debian.qcow2 32G")
         return 0
     else:
         print(f"[-]Folder {data_path} already exists")
@@ -110,8 +111,8 @@ qemu_commond = {
         "LSB": f"qemu-system-mipsel -M malta -kernel ./{data}/vmlinux -hda ./{data}/debian.qcow2 -append \"root=/dev/sda1 console=tty0\" -net nic -net tap,ifname=tap0 -s -nographic"
     },
     "ARM": {
-        "LSB": f"qemu-system-arm -M versatilepb -kernel ./{data}/vmlinux -initrd ./{data}/initrd.img -hda ./{data}/debian.qcow2 -append \"root=/dev/sda1 console=tty0\" -net nic -net tap,ifname=tap0 -s -nographic",
-        "MSB": f"qemu-system-arm -M versatilepb -kernel ./{data}/vmlinux -initrd ./{data}/initrd.img -hda ./{data}/debian.qcow2 -append \"root=/dev/sda1 console=tty0\" -net nic -net tap,ifname=tap0 -s -nographic"
+        "LSB": f"qemu-system-arm -M vexpress-a9 -kernel ./{data}/vmlinux -initrd ./{data}/initrd.img -drive if=sd,file=./{data}/debian.qcow2 -append \"root=/dev/mmcblk0p2 console=tty0\" -net nic -net tap,ifname=tap0 -s -nographic -smp 4",
+        "MSB": f"qemu-system-arm -M vexpress-a9 -kernel ./{data}/vmlinux -initrd ./{data}/initrd.img -drive if=sd,file=./{data}/debian.qcow2 -append \"root=/dev/mmcblk0p2 console=tty0\" -net nic -net tap,ifname=tap0 -s -nographic -smp 4"
 
     }
 }

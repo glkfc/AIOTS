@@ -43,10 +43,11 @@ pip install lief
 pip install wget
 ```
 
-- Install `bridge-utils` and `uml-utilities` packages
+- Install`expect`、`bridge-utils` and `uml-utilities` packages
 
 ```
 sudo apt-get install bridge-utils uml-utilities
+sudo apt-get install expect
 ```
 
 ## Usage
